@@ -1,0 +1,60 @@
+{
+	"name": "nativescript-ngx-date-range",
+	"version": "1.0.0",
+	"description": "Your awesome NativeScript plugin.",
+	"main": "ngx-date-range",
+	"typings": "index.d.ts",
+	"nativescript": {
+		"platforms": {
+			"android": "6.0.0",
+			"ios": "6.0.1"
+		}
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dudipsh/nativescript-ngx-date-range.git"
+	},
+	"scripts": {
+		"tsc": "npm i && tsc",
+		"build": "npm run tsc && npm run build.native",
+		"build.native": "node scripts/build-native.js",
+		"tslint": "cd .. && tslint \"**/*.ts\" --config tslint.json --exclude \"**/node_modules/**\"",
+		"ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**' --exclude '**/platforms/**'",
+		"prepack": "npm run build.native",
+		"demo.ios": "npm run tsc && cd ../demo && tns run ios --emulator",
+		"demo.android": "npm run tsc && cd ../demo && tns run android --emulator",
+		"demo.reset": "cd ../demo && npx rimraf -- hooks node_modules platforms package-lock.json",
+		"demo-angular.ios": "npm run tsc && cd ../demo-angular && tns debug ios --hmr --emulator",
+		"demo-angular.android": "npm run tsc && cd ../demo-angular && tns debug android --emulator",
+		"demo-angular.reset": "cd ../demo-angular && npx rimraf -- hooks node_modules platforms package-lock.json",
+		"plugin.prepare": "npm run build && cd ../demo && tns plugin remove nativescript-ngx-date-range && tns plugin add ../src && cd ../demo-angular && tns plugin remove nativescript-ngx-date-range && tns plugin add ../src",
+		"clean": "npm run demo.reset && npm run demo-angular.reset && npx rimraf -- node_modules package-lock.json && npm i"
+	},
+	"keywords": [
+		"NativeScript",
+		"JavaScript",
+		"Android",
+		"iOS"
+	],
+	"author": {
+		"name": "Dudi",
+		"email": "youremail@yourdomain.com"
+	},
+	"bugs": {
+		"url": "https://github.com/dudipsh/nativescript-ngx-date-range/issues"
+	},
+	"license": "Apache-2.0",
+	"homepage": "https://github.com/dudipsh/nativescript-ngx-date-range",
+	"devDependencies": {
+		"nativescript-angular": "^8.2.0",
+		"prompt": "^1.0.0",
+		"rimraf": "^2.6.3",
+		"semver": "^5.6.0",
+		"tns-core-modules": "^6.0.0",
+		"tns-platform-declarations": "^6.0.0",
+		"tslint": "^5.12.1",
+		"typescript": "~3.4.5"
+	},
+	"dependencies": {},
+	"bootstrapper": "nativescript-plugin-seed"
+}
