@@ -68,3 +68,5 @@ export class RangeDates {
 }
 
 
+import {registerElement} from "nativescript-angular";
+registerElement("NgxDateRange", () => require("./").NgxDateRange);

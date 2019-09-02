@@ -21,3 +21,4 @@ export declare class NgxDateRange extends Common {
 //     MULTIPLE = 1,
 //     RANGE = 2,
 // }
+export function create(options?: Options): NgxDateRange;

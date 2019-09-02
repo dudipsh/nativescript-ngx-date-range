@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {NgxDateRange} from "../../../../src";
+import {create, NgxDateRange} from "../../../../src";
 import {Options} from "../../../../src/ngx-date-range.common";
 import {DateRangeOptions} from "../../../../src/ngx-date-range.android";
 
@@ -19,8 +19,9 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(): void {
         const options = new Options();
-        options.selectionMode = 'RANGE';
-       this.dateRange = new NgxDateRange();
+        options.selectionMode = 'SINGLE';
+        this.dateRange =  create(options);
+      // this.dateRange = new NgxDateRange();
         console.log(this.dateRange);
      }
     test() {
