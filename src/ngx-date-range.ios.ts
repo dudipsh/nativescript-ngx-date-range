@@ -1,20 +1,23 @@
-import { Common } from './ngx-date-range.common';
+import {Common, Options} from './ngx-date-range.common';
 import {View} from "tns-core-modules/ui/core/view";
 import {Color} from "tns-core-modules/color";
-import {Options} from "./index";
 declare var CalendarDateRangePickerViewController;
-
+var options: Options;
 
 export class NgxDateRange extends Common {
     dateRangePickerViewController;
     _hostView: View;
 
-    constructor(options: Options, hostView?: View) {
+    constructor( hostView?: View) {
         super();
         this._hostView = hostView;
     }
     get hostView() {
         return this._hostView;
+    }
+
+    public static options(_options: Options) {
+        options = _options;
     }
 
     present() {

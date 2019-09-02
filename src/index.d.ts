@@ -1,16 +1,19 @@
-import { Common } from './ngx-date-range.common';
+import {Common, Options} from './ngx-date-range.common';
+import {DateRangeOptions} from "./ngx-date-range.android";
+
 export declare class NgxDateRange extends Common {
+
+
+    public  getSelectedDates: () => any;
+    public  options: (_options: Options) => void;
+
+    //options: Options;
   // define your typings manually
   // or..
   // take the ios or android .d.ts files and copy/paste them here
-    public initCalendar: () => NgxDateRange;
-    public  getSelectedDates: () => any;
+  //   public initCalendar: () => NgxDateRange;
+
 }
-
-
-interface Options {
-    supportsRtl?: boolean;
- }
 
 
 // export enum SelectionMode {

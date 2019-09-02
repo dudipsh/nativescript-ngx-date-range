@@ -1,10 +1,10 @@
 import {Component, OnInit} from "@angular/core";
-import {NgxDateRange, Options} from "../../../../src";
+import {NgxDateRange} from "../../../../src";
+import {Options} from "../../../../src/ngx-date-range.common";
+import {DateRangeOptions} from "../../../../src/ngx-date-range.android";
 
 // https://github.com/NativeScript/nativescript-imagepicker/blob/master/src/imagepicker.android.ts
 // https://github.com/NativeScript/nativescript-imagepicker/blob/master/src/imagepicker.android.ts
-
-// import {NgxDateRange} from "../../../../src";
 
 @Component({
     selector: "Home",
@@ -12,29 +12,22 @@ import {NgxDateRange, Options} from "../../../../src";
     templateUrl: "./home.component.html"
 })
 export class HomeComponent implements OnInit {
-    dateRange: NgxDateRange;
+    dateRange;
     constructor() {
         // Use the component constructor to inject providers.
     }
 
     ngOnInit(): void {
-
-        // const option: Options = {
-        //     selectionMode: SelectionMode.SINGLE,
-        //     supportsRtl: true
-        // };
-        this.dateRange  = new NgxDateRange();
-    //    this.dateRange.initCalendar();
-      //  this.dateRange = dateRange.initCalendar(this);
-        // Init your component properties here.
-    }
+        const options = new Options();
+        options.selectionMode = 'RANGE';
+       this.dateRange = new NgxDateRange();
+        console.log(this.dateRange);
+     }
     test() {
-        console.log('*222**')
         console.log(this.dateRange.getSelectedDates())
-       // console.log(this.dateRange.getSelectedDates())
     }
-    onLoaded(args) {
-        console.log('2')
-        console.log(this.dateRange)
+
+    setOnDateSelectedListener($event) {
+        console.log($event)
     }
 }

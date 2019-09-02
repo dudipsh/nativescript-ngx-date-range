@@ -1,24 +1,34 @@
-import { Common } from './ngx-date-range.common';
+import {Common, Options} from './ngx-date-range.common';
 import SimpleDateFormat = java.text.SimpleDateFormat;
 import Locale = java.util.Locale;
 import Integer = java.lang.Integer;
 import View = android.view.View;
+import {CSSType} from "tns-core-modules/ui/core/view";
+import {Page} from "tns-core-modules/ui/page";
 
 declare let com: any;
 const CalendarPickerView = com.savvi.rangedatepicker.CalendarPickerView;
 let calendarView;
+let options: DateRangeOptions;
+
+ @CSSType("DateRangeOptions")
+export class DateRangeOptions {
+    public  selectionMode?: string;
+    constructor() {
+    }
+}
+
 export class NgxDateRange extends Common {
     private _androidViewId: number;
     nativeViewProtected: any;
     calendarView;
-    private _options: any;
-    constructor(options) {
+    constructor(_options?: DateRangeOptions) {
         super();
-        this._options = options;
+        options = _options;
     }
 
+    public initCalendar(): any {
 
-    public initCalendar() {
         calendarView = new CalendarPickerView(this._context, null);
         let nextYear = java.util.Calendar.getInstance();
         let lastYear = java.util.Calendar.getInstance();
@@ -46,14 +56,13 @@ export class NgxDateRange extends Common {
       //  this.calendarView = calendarView;
      //   console.log(this.calendarView);
         //   this.calendarView.supportsRtl = false
-        // calendarView.__proto__.setOnDateSelectedListener({
-        //
-        // })
+
+
         return calendarView;
     }
     public createNativeView() {
         this.calendarView = this.initCalendar();
-        return this.calendarView
+        return this.calendarView;
     }
     public initNativeView(): void {
         super.initNativeView();
@@ -63,7 +72,6 @@ export class NgxDateRange extends Common {
     }
 
      getSelectedDates() {
-       // return JSON.stringify(calendarView.getSelectedDates().toString());
          const selectedDates = {
              startDate: null,
              endDate: null,
@@ -88,6 +96,9 @@ export class NgxDateRange extends Common {
         }
          return selectedDates;
     }
+    // public setOnDateSelectedListener(listener: OnDateSelectedListener) {
+    //     return this.calendarView.setOnDateSelectedListener(listener);
+    // }
 
     public showOnlyFutureDates() {
         let nextYear = java.util.Calendar.getInstance();
@@ -111,7 +122,3 @@ export class NgxDateRange extends Common {
     }
 
 }
-//
-// export function create(options?: any): NgxDateRange {
-//     return new NgxDateRange(options);
-// }
