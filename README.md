@@ -1,7 +1,6 @@
 # Nativescript ui date range
 
 Date Range plugin for angular support only for Android!
-https://github.com/dudipsh/nativescript-ngx-date-range/blob/master/screenshots/calendar1.png
 
 ![nativesceipt date range](https://raw.githubusercontent.com/dudipsh/nativescript-ngx-date-range/master/screenshots/calendar.png)
 
