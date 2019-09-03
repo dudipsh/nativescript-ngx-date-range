@@ -52,6 +52,7 @@ getSelectedDates() => {
 
 Options  = {
     selectionMode?: 'SINGLE' | 'MULTIPLE' | 'RANGE'; // default = RANGE
+    initialDate?: 'yyyy/mm/dd' // default = today
     simpleDateFormat?: string; // default = "MMMM, YYYY"
     supportsRtl?: boolean; // default = false
     disablePrevDates?: boolean; // default = false

@@ -5,6 +5,7 @@ export class Common extends View {
 }
 export class Options {
     selectionMode?: 'SINGLE' | 'MULTIPLE' | 'RANGE';
+    initialDate?: string;
     simpleDateFormat?: string;
     supportsRtl?: boolean;
     disablePrevDates?: boolean;
@@ -12,6 +13,7 @@ export class Options {
     constructor() {
         this.selectionMode = 'RANGE';
         this.simpleDateFormat = 'MMMM, YYYY';
+        this.initialDate = null;
         this.supportsRtl = false;
         this.disablePrevDates = false;
         this.selectToday = false;

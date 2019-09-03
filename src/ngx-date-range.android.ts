@@ -51,7 +51,10 @@ export class NgxDateRange extends Common {
         nextYear.add(java.util.Calendar.DAY_OF_MONTH, dateRange.nextYear);
         // @ts-ignore
         const list: java.util.ArrayList<Integer> = new java.util.ArrayList<>();
-        const today = new java.util.Date();
+        let today = new java.util.Date();
+        if (options.initialDate) {
+            today = new java.util.Date(options.initialDate);
+        }
         // @ts-ignore
         const arrayList: java.util.ArrayList<java.util.Date>  = new java.util.ArrayList<>();
         calendarView.deactivateDates(list);
