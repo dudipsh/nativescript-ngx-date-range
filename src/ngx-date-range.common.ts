@@ -1,19 +1,20 @@
-import {CSSType, View} from "tns-core-modules/ui/core/view";
+import { View} from "tns-core-modules/ui/core/view";
 
-
-// @CSSType("NgxDateRange")
-//
-// @CSSType("Options")
 export class Common extends View {
 
 }
 export class Options {
-    supportsRtl?: boolean;
     selectionMode?: 'SINGLE' | 'MULTIPLE' | 'RANGE';
-
+    simpleDateFormat?: string;
+    supportsRtl?: boolean;
+    disablePrevDates?: boolean;
+    selectToday?: boolean;
     constructor() {
         this.selectionMode = 'RANGE';
+        this.simpleDateFormat = 'MMMM, YYYY';
         this.supportsRtl = false;
+        this.disablePrevDates = false;
+        this.selectToday = false;
     }
 }
 

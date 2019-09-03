@@ -11,12 +11,6 @@ const CalendarPickerView = com.savvi.rangedatepicker.CalendarPickerView;
 let calendarView;
 let options: Options;
 
-@CSSType("DateRangeOptions")
-export class DateRangeOptions {
-    public  selectionMode?: string;
-    constructor() {
-    }
-}
 
 export class NgxDateRange extends Common {
     private _androidViewId: number;
@@ -25,22 +19,36 @@ export class NgxDateRange extends Common {
     constructor() {
         super();
     }
-
+    private getCalendarRangeValues() {
+        let next = 2;
+        let back = -1;
+        if (options.disablePrevDates) {
+            back = 0;
+            next = 1;
+        };
+        const calender = {
+            lastYear: back,
+            lastMonth: back,
+            lastDayOfMoth: back,
+            nextYear: next,
+            nextMonth: next,
+            nextDayOfMoth: next,
+        };
+        return calender;
+    }
     public initCalendar(): any {
-        const _option = {
-            [options.selectionMode]: CalendarPickerView.SelectionMode[options.selectionMode]
-        }
-        [options.selectionMode]
+        const dateRange = this.getCalendarRangeValues();
         calendarView = new CalendarPickerView(this._context, null);
+
         let nextYear = java.util.Calendar.getInstance();
         let lastYear = java.util.Calendar.getInstance();
-        lastYear.add(java.util.Calendar.YEAR, -1);
-        lastYear.add(java.util.Calendar.MONTH, -10);
-        lastYear.add(java.util.Calendar.DAY_OF_MONTH, -1);
+        lastYear.add(java.util.Calendar.YEAR, dateRange.lastYear);
+        lastYear.add(java.util.Calendar.MONTH, dateRange.lastYear);
+        lastYear.add(java.util.Calendar.DAY_OF_MONTH, dateRange.lastYear);
 
-        nextYear.add(java.util.Calendar.YEAR, 2);
-        nextYear.add(java.util.Calendar.MONTH, 2);
-        nextYear.add(java.util.Calendar.DAY_OF_MONTH, 2);
+        nextYear.add(java.util.Calendar.YEAR, dateRange.nextYear);
+        nextYear.add(java.util.Calendar.MONTH, dateRange.nextYear);
+        nextYear.add(java.util.Calendar.DAY_OF_MONTH, dateRange.nextYear);
         // @ts-ignore
         const list: java.util.ArrayList<Integer> = new java.util.ArrayList<>();
         const today = new java.util.Date();
@@ -51,20 +59,16 @@ export class NgxDateRange extends Common {
             lastYear.getTime(),
             nextYear.getTime(),
             new SimpleDateFormat("MMMM, YYYY", Locale.getDefault()))
-            .inMode(CalendarPickerView.SelectionMode[_option])
+            .inMode(CalendarPickerView.SelectionMode[options.selectionMode])
             .withHighlightedDates(arrayList)
             .withSelectedDate(today);
-        calendarView.clearSelectedDates();
-      //  this.calendarView = calendarView;
-     //   console.log(this.calendarView);
-        //   this.calendarView.supportsRtl = false
-
-
+        if (!options.selectToday) {
+            calendarView.clearSelectedDates();
+        }
+        calendarView.supportsRtl = options.supportsRtl;
         return calendarView;
     }
     public createNativeView() {
-        console.log('**')
-        console.log(options)
         this.calendarView = this.initCalendar();
         return this.calendarView;
 
@@ -101,38 +105,13 @@ export class NgxDateRange extends Common {
         }
          return selectedDates;
     }
-    // public setOnDateSelectedListener(listener: OnDateSelectedListener) {
-    //     return this.calendarView.setOnDateSelectedListener(listener);
-    // }
-
-    public showOnlyFutureDates() {
-        let nextYear = java.util.Calendar.getInstance();
-        let lastYear = java.util.Calendar.getInstance();
-        lastYear.add(java.util.Calendar.YEAR, 0);
-        lastYear.add(java.util.Calendar.MONTH, 0);
-        lastYear.add(java.util.Calendar.DAY_OF_MONTH, 0);
-
-        nextYear.add(java.util.Calendar.YEAR, 1);
-        nextYear.add(java.util.Calendar.MONTH, 1);
-        nextYear.add(java.util.Calendar.DAY_OF_MONTH, 1);
-        const calendarView = new CalendarPickerView(this._context, null);
-
-        calendarView.init(
-            lastYear.getTime(),
-            nextYear.getTime(),
-            new SimpleDateFormat("MMMM, YYYY", Locale.getDefault()))
-            .withSelectedDate(new java.util.Date())
-            .inMode(CalendarPickerView.SelectionMode.MULTIPLE); // [options.selectionMode]
-        calendarView.clearSelectedDates();
-    }
 
 }
 
 export function create(_options?: Options) {
     options = _options;
-    console.log(options)
-    registerElement("NgxDateRange", () => require("./").NgxDateRange);
     return new NgxDateRange();
 }
+registerElement("NgxDateRange", () => require("./").NgxDateRange);
 
 

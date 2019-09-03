@@ -1,40 +1,70 @@
-# Your Plugin Name
+# Nativescript ui date range
 
-Add your plugin badges here. See [nativescript-urlhandler](https://github.com/hypery2k/nativescript-urlhandler) for example.
+Date Range plugin for angular support only for Android!
 
-Then describe what's the purpose of your plugin. 
 
-In case you develop UI plugin, this is where you can add some screenshots.
-
-## (Optional) Prerequisites / Requirements
-
-Describe the prerequisites that the user need to have installed before using your plugin. See [nativescript-firebase plugin](https://github.com/eddyverbruggen/nativescript-plugin-firebase) for example.
+![nativesceipt date range](https://raw.githubusercontent.com/dudipsh/nativescript-ngx-date-range/master/screenshots/dateRange1.PNG)
 
 ## Installation
 
-Describe your plugin installation steps. Ideally it would be something like:
-
 ```javascript
-tns plugin add <your-plugin-name>
+npm i nativescript-ngx-date-range --save
 ```
 
 ## Usage 
 
-Describe any usage specifics for your plugin. Give examples for Android, iOS, Angular if needed. See [nativescript-drop-down](https://www.npmjs.com/package/nativescript-drop-down) for example.
-	
-	```javascript
-    Usage code snippets here
-    ```)
+#### app.module
+```typescript
+export class HomeComponent implements OnInit {
+    dateRange;
+    constructor() {
+    }
+
+    ngOnInit(): void {
+        const options = new Options();
+        options.selectionMode = 'RANGE';
+        options.selectToday = true;
+        options.disablePrevDates = true;
+        this.dateRange =  create(options);
+     }
+    selectedDates() {
+        console.log(this.dateRange.getSelectedDates())
+    }
+
+}
+```
+
+#### home.component.html
+```html
+<StackLayout>
+    <Button class="btn btn-active" text="Console Dates" (tap)="selectedDates()"></Button>
+    <NgxDateRange></NgxDateRange>
+    <!-- Add your page content here -->
+</StackLayout>
+```
 
 ## API
+```typescript
+getSelectedDates() => {
+    startDate: string,
+    endDate: string,
+    originDates: string[]
+}
 
-Describe your plugin methods and properties here. See [nativescript-feedback](https://github.com/EddyVerbruggen/nativescript-feedback) for example.
-    
-| Property | Default | Description |
-| --- | --- | --- |
-| some property | property default value | property description, default values, etc.. |
-| another property | property default value | property description, default values, etc.. |
-    
+Options  = {
+    selectionMode?: 'SINGLE' | 'MULTIPLE' | 'RANGE'; // default = RANGE
+    simpleDateFormat?: string; // default = "MMMM, YYYY"
+    supportsRtl?: boolean; // default = false
+    disablePrevDates?: boolean; // default = false
+    selectToday?: boolean;  // default = false
+}
+```
+
+
+
+
+
 ## License
+
 
 Apache License Version 2.0, January 2004

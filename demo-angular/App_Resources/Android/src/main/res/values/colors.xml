@@ -4,4 +4,11 @@
 	<color name="ns_primaryDark">#757575</color>
 	<color name="ns_accent">#33B5E5</color>
     <color name="ns_blue">#272734</color>
+    <color name="transparent">#272734</color>
+    <color name="calendar_selected_day_bg">#a6d3d6</color>
+    <color name="calendar_selected_range_bg">#a6d3d6</color>
+    <color name="calendar_unavailable_bg">#585757</color>
+    <color name="calendar_range_middle_unavailable_bg">#eae72b</color>
+    <color name="calendar_range_middle_deactivated_bg">#673AB7</color>
+
 </resources>

@@ -7,5 +7,4 @@ publish() {
     echo 'Publishing to npm...'
     npm publish *.tgz
 }
-
-./pack.sh && publish
+sh ./pack.sh && publish
