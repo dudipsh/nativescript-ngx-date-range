@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {create, NgxDateRange} from "../../../../src";
 import {Options} from "../../../../src/ngx-date-range.common";
+import {Page} from "tns-core-modules/ui/page";
 
 // https://github.com/NativeScript/nativescript-imagepicker/blob/master/src/imagepicker.android.ts
 // https://github.com/NativeScript/nativescript-imagepicker/blob/master/src/imagepicker.android.ts
@@ -11,19 +12,22 @@ import {Options} from "../../../../src/ngx-date-range.common";
     templateUrl: "./home.component.html"
 })
 export class HomeComponent implements OnInit {
-    dateRange;
-    constructor() {
+    dateRange: NgxDateRange;
+    constructor(private page: Page) {
     }
 
     ngOnInit(): void {
-        const options = new Options();
-        options.selectionMode = 'RANGE';
-        options.selectToday = true;
-        options.disablePrevDates = true;
-        this.dateRange =  create(options);
+        // const options = new Options();
+        // options.selectionMode = 'RANGE';
+        // options.selectToday = true;
+        // options.disablePrevDates = true;
+        this.dateRange =  create();
+       // this.dateRange.start(this.page.nativeView)
+
+      // this.page.frame.ios.controller = this.dateRange
      }
     selectedDates() {
-        console.log(this.dateRange.getSelectedDates())
+   //     console.log(this.dateRange.getSelectedDates())
     }
 
 }
