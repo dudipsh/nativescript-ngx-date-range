@@ -1,7 +1,7 @@
 # Nativescript ui date range
 
-Date Range plugin for angular support only for Android!
-* [Breakdance](http://breakdance.io) - HTML to Markdown converter
+Date Range Picker plugin for angular support only for Android (for now)
+Support RTL
 ![nativesceipt date range](https://raw.githubusercontent.com/dudipsh/nativescript-ngx-date-range/master/screenshots/calendar.png)
 
 ## Installation
@@ -57,8 +57,15 @@ Options  = {
     supportsRtl?: boolean; // default = false
     disablePrevDates?: boolean; // default = false
     selectToday?: boolean;  // default = false
+    language?: 
+        {
+             countryCode: 'ISR', //default = null
+             languageCode: 'heb' // default = null
+         };
+
 }
 ```
+[You can learn about the language object here](https://www.localeplanet.com/java/he-IL/index.html)
 
 
 
@@ -67,4 +74,4 @@ Options  = {
 ## License
 
 
-Apache License Version 2.0, January 2004
+Apache License Version 2.0

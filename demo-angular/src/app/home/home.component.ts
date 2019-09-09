@@ -17,17 +17,18 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // const options = new Options();
-        // options.selectionMode = 'RANGE';
-        // options.selectToday = true;
-        // options.disablePrevDates = true;
-        this.dateRange =  create();
-       // this.dateRange.start(this.page.nativeView)
-
-      // this.page.frame.ios.controller = this.dateRange
+          const options = new Options();
+        options.selectionMode = 'RANGE';
+          options.selectToday = true;
+         options.disablePrevDates = true;
+         options.language = {
+             countryCode: 'ISR',
+             languageCode: 'heb'
+         };
+        this.dateRange =  create(options);
      }
     selectedDates() {
-   //     console.log(this.dateRange.getSelectedDates())
+       console.log(this.dateRange.getSelectedDates())
     }
 
 }

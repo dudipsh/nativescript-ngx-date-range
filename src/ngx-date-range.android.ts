@@ -9,7 +9,7 @@ import {registerElement} from "nativescript-angular";
 declare let com: any;
 const CalendarPickerView = com.savvi.rangedatepicker.CalendarPickerView;
 let calendarView;
-let options: Options;
+let options: Options = new Options();
 
 
 export class NgxDateRange extends Common {
@@ -58,10 +58,15 @@ export class NgxDateRange extends Common {
         // @ts-ignore
         const arrayList: java.util.ArrayList<java.util.Date>  = new java.util.ArrayList<>();
         calendarView.deactivateDates(list);
+        let local = Locale.getDefault();
+        if (options.language.languageCode && options.language.countryCode) {
+             local = new Locale(options.language.languageCode, options.language.countryCode);
+        };
+
         calendarView.init(
             lastYear.getTime(),
             nextYear.getTime(),
-            new SimpleDateFormat("MMMM, YYYY", Locale.getDefault()))
+            new SimpleDateFormat("MMMM, YYYY", local))
             .inMode(CalendarPickerView.SelectionMode[options.selectionMode])
             .withHighlightedDates(arrayList)
             .withSelectedDate(today);

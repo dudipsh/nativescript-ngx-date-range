@@ -10,6 +10,10 @@ export class Options {
     supportsRtl?: boolean;
     disablePrevDates?: boolean;
     selectToday?: boolean;
+    language: {
+        languageCode: string,
+        countryCode: string
+    };
     constructor() {
         this.selectionMode = 'RANGE';
         this.simpleDateFormat = 'MMMM, YYYY';
@@ -17,6 +21,10 @@ export class Options {
         this.supportsRtl = false;
         this.disablePrevDates = false;
         this.selectToday = false;
+        this.language = {
+            languageCode: null,
+            countryCode: null
+        };
     }
 }
 
