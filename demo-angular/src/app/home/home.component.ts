@@ -13,22 +13,24 @@ import {Page} from "tns-core-modules/ui/page";
 })
 export class HomeComponent implements OnInit {
     dateRange: NgxDateRange;
+
     constructor(private page: Page) {
     }
 
     ngOnInit(): void {
-          const options = new Options();
+        const options = new Options();
         options.selectionMode = 'RANGE';
-          options.selectToday = true;
-         options.disablePrevDates = true;
-         options.language = {
-             countryCode: 'ISR',
-             languageCode: 'heb'
-         };
-        this.dateRange =  create(options);
-     }
+        options.selectToday = true;
+        options.disablePrevDates = true;
+        options.language = {
+            countryCode: 'ISR',
+            languageCode: 'heb'
+        };
+        this.dateRange = create(options);
+    }
+
     selectedDates() {
-       console.log(this.dateRange.getSelectedDates())
+        console.log(this.dateRange.getSelectedDates());
     }
 
 }

@@ -58,15 +58,18 @@ export class NgxDateRange extends Common {
         // @ts-ignore
         const arrayList: java.util.ArrayList<java.util.Date>  = new java.util.ArrayList<>();
         calendarView.deactivateDates(list);
+
         let local = Locale.getDefault();
         if (options.language.languageCode && options.language.countryCode) {
-             local = new Locale(options.language.languageCode, options.language.countryCode);
-        };
+            const location = new Locale(options.language.languageCode);
+            Locale.setDefault(location)
+            local = new Locale(options.language.languageCode, options.language.countryCode);
+        }
 
         calendarView.init(
             lastYear.getTime(),
             nextYear.getTime(),
-            new SimpleDateFormat("MMMM, YYYY", local))
+            new SimpleDateFormat(options.simpleDateFormat, local))
             .inMode(CalendarPickerView.SelectionMode[options.selectionMode])
             .withHighlightedDates(arrayList)
             .withSelectedDate(today);
