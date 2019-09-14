@@ -65,7 +65,7 @@ Options  = {
 
 }
 ```
-[You can learn about the language object here](https://www.localeplanet.com/java/he-IL/index.html)
+[Language object](https://www.localeplanet.com/java/he-IL/index.html)
 
 
 

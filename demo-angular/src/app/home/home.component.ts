@@ -3,8 +3,6 @@ import {create, NgxDateRange} from "../../../../src";
 import {Options} from "../../../../src/ngx-date-range.common";
 import {Page} from "tns-core-modules/ui/page";
 
-// https://github.com/NativeScript/nativescript-imagepicker/blob/master/src/imagepicker.android.ts
-// https://github.com/NativeScript/nativescript-imagepicker/blob/master/src/imagepicker.android.ts
 
 @Component({
     selector: "Home",
@@ -24,7 +22,7 @@ export class HomeComponent implements OnInit {
         options.disablePrevDates = true;
         options.language = {
             countryCode: 'ISR',
-            languageCode: 'heb'
+            languageCode: 'he'
         };
         this.dateRange = create(options);
     }

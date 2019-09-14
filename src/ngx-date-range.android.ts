@@ -2,13 +2,13 @@ import {Common, Options} from './ngx-date-range.common';
 import SimpleDateFormat = java.text.SimpleDateFormat;
 import Locale = java.util.Locale;
 import Integer = java.lang.Integer;
-import View = android.view.View;
-import {CSSType} from "tns-core-modules/ui/core/view";
-import {Page} from "tns-core-modules/ui/page";
 import {registerElement} from "nativescript-angular";
+
 declare let com: any;
-const CalendarPickerView = com.savvi.rangedatepicker.CalendarPickerView;
 let calendarView;
+
+
+const CalendarPickerView = com.nativescript.daterange.CalendarPickerView;
 let options: Options = new Options();
 
 
@@ -118,10 +118,22 @@ export class NgxDateRange extends Common {
     }
 
 }
-
+import { android as androidApp } from "tns-core-modules/application";
 export function create(_options?: Options) {
     options = _options;
     return new NgxDateRange();
+   //  console.log(11)
+   //   const range = new NgxRange(androidApp.context);
+   //  console.log(range.GetSavviCalendar)
+   // range.CalendarPickerView();
+   // return NgxDateRange.CalendarPickerView()
+ //   console.log(1)
+ //    const test = new com.nativescript.daterange.NgxRange(androidApp.context)
+  //  console.log(test)
+
+  //  return test.CalendarPickerView();
+ //   console.log( com.nativescript.daterange.NgxDateRange)
+  //  ngx.CreateCalendar(this)
 }
 registerElement("NgxDateRange", () => require("./").NgxDateRange);
 
