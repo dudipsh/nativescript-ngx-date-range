@@ -1,1 +1,2 @@
-pod 'CalendarDateRangePicker'
+# We need to use this forked version to expose the protocol and delegate property to objc
+pod 'CalendarDateRangePicker', :git => 'https://github.com/henrychavez/CalendarDateRangePicker.git'

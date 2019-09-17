@@ -1,84 +1,58 @@
-import {Common, Options} from './ngx-date-range.common';
-import {registerElement} from "nativescript-angular";
-import {topmost} from "tns-core-modules/ui/frame";
-import {View} from "tns-core-modules/ui/core/view";
-declare var CalendarDateRangePickerViewController;
+import { Common } from './ngx-date-range.common';
+import { topmost } from 'tns-core-modules/ui/frame';
 
-var options: Options;
-registerElement("NgxDateRange", () => require("./").NgxDateRange);
+class CalendarDateRangePickerViewControllerDelegateImpl extends NSObject
+  implements CalendarDateRangePickerViewControllerDelegate {
+  static ObjCProtocols = [CalendarDateRangePickerViewControllerDelegate];
+
+  static new(): CalendarDateRangePickerViewControllerDelegateImpl {
+    return <CalendarDateRangePickerViewControllerDelegateImpl>super.new(); // calls new() on the NSObject
+  }
+
+  didPickDateRangeWithStartDateEndDate(startDate: Date, endDate: Date): void {
+    console.log('didPickDateRangeWithStartDateEndDate', { startDate, endDate });
+  }
+  didSelectEndDateWithEndDate(endDate: Date): void {
+    console.log('didSelectEndDateWithEndDate', { endDate });
+  }
+  didSelectStartDateWithStartDate(startDate: Date): void {
+    console.log('didSelectStartDateWithStartDate', { startDate });
+  }
+
+  didCancelPickingDateRange(): void {
+    console.log('didCancelPickingDateRange');
+    const currentViewController = topmost().viewController as UIViewController;
+    currentViewController.dismissViewControllerAnimatedCompletion(true, () => {
+      console.log('Date picker dismissed');
+    });
+  }
+}
 
 export class NgxDateRange extends Common {
-    public startDate: Date;
-    public endDate: Date;
-    reject;
-    resolve;
-    private _delegate: CalendarDateRangePickerViewControllerDelegateImpl;
-    dateRangePickerViewController
-    constructor() {
-        super();
-        const collectionViewLayout =  UICollectionViewFlowLayout.alloc();
-        this.dateRangePickerViewController =  CalendarDateRangePickerViewController.new()
-        this._delegate = CalendarDateRangePickerViewControllerDelegateImpl.initWithOwner(new WeakRef<NgxDateRange>(this));
-        this.dateRangePickerViewController.delegate = this._delegate;
+  delegate: CalendarDateRangePickerViewControllerDelegateImpl;
 
-         //   .present(this.dateRangePickerViewController.dateRangePickerViewController, true, null)
+  showDateRangePicker() {
+    const nativeView = CalendarDateRangePickerViewController.new().initWithCollectionViewLayout(
+      UICollectionViewFlowLayout.new().init(),
+    );
 
-        // const collectionViewLayout =  UICollectionViewFlowLayout.alloc()
-        // let dateRangePickerViewController = CalendarDateRangePickerViewController(collectionViewLayout)
-        // dateRangePickerViewController.delegate = CalendarDateRangePickerViewControllerDelegateImpl
+    this.delegate = CalendarDateRangePickerViewControllerDelegateImpl.new().init();
 
-        // let delegate: DateRangePickerDelegateImpl = DateRangePickerDelegateImpl.new();
-        //
-        // let dateRangePickerViewController = CalendarDateRangePickerViewController.new()
-        // dateRangePickerViewController.delegate = delegate;
-        // let navigationController = new UINavigationController(dateRangePickerViewController)
-        // nativeView = view.nativeView;
-    }
-    // public initNativeView() {
-    //    // dateRangePickerViewController.delegate = this._delegate;
-    //     let navigationController = new UINavigationController(this.dateRangePickerViewController)
-    //     navigationController.setViewControllersAnimated(this.dateRangePickerViewController, true)
-    // }
-    //
-    // public onLoaded() {
-    //     super.onLoaded();
-    //     (this.nativeViewProtected as UINavigationController).delegate = this._delegate;
-    // }
-}
+    nativeView.delegate = this.delegate;
 
-export function create(_options) {
-    return new NgxDateRange();
-}
+    const navigationController = UINavigationController.new().initWithRootViewController(
+      nativeView,
+    );
 
+    const currentViewController = topmost().viewController as UIViewController;
 
-export class CalendarDateRangePickerViewControllerDelegate {
-    didCancelPickingDateRange: () => void;
-    didPickDateRange: (startDate: Date, endDate: Date) => void;
-}
-
-@ObjCClass(CalendarDateRangePickerViewControllerDelegate)
-class CalendarDateRangePickerViewControllerDelegateImpl extends NSObject {
-    public static initWithOwner(owner: WeakRef<NgxDateRange>): CalendarDateRangePickerViewControllerDelegateImpl {
-        const delegate = CalendarDateRangePickerViewControllerDelegateImpl.new() as CalendarDateRangePickerViewControllerDelegateImpl;
-        delegate._owner = owner;
-
-        return delegate;
-    }
-
-    private _owner: WeakRef<NgxDateRange>;
-    private startDate: Date;
-    private endDate: Date;
-
-    public didCancelPickingDateRange() {
-
-    }
-
-    public didPickDateRange(startDate: Date, endDate: Date) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this._owner.get().startDate = startDate;
-        this._owner.get().endDate = startDate;
-
-    }
-
+    currentViewController.presentViewControllerAnimatedCompletion(
+      navigationController,
+      true,
+      () => {
+        // TODO: Pending of implementation
+        console.log('Date Picker presented');
+      },
+    );
+  }
 }
