@@ -65,11 +65,11 @@ export class NgxDateRange extends Common {
             Locale.setDefault(location)
             local = new Locale(options.language.languageCode, options.language.countryCode);
         }
-
+        calendarView.setRtl(true);
         calendarView.init(
             lastYear.getTime(),
             nextYear.getTime(),
-            new SimpleDateFormat(options.simpleDateFormat, local))
+            new SimpleDateFormat(options.simpleDateFormat, local), local, options.supportsRtl)
             .inMode(CalendarPickerView.SelectionMode[options.selectionMode])
             .withHighlightedDates(arrayList)
             .withSelectedDate(today);

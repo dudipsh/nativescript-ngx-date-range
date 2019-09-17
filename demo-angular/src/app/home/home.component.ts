@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
         const options = new Options();
         options.selectionMode = 'RANGE';
         options.selectToday = true;
+        options.supportsRtl = true;
         options.disablePrevDates = true;
         options.language = {
             countryCode: 'ISR',
