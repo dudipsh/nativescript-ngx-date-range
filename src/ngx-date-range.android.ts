@@ -25,7 +25,7 @@ export class NgxDateRange extends Common {
         if (options.disablePrevDates) {
             back = 0;
             next = 1;
-        };
+        }
         const calender = {
             lastYear: back,
             lastMonth: back,
@@ -62,10 +62,9 @@ export class NgxDateRange extends Common {
         let local = Locale.getDefault();
         if (options.language.languageCode && options.language.countryCode) {
             const location = new Locale(options.language.languageCode);
-            Locale.setDefault(location)
+            Locale.setDefault(location);
             local = new Locale(options.language.languageCode, options.language.countryCode);
         }
-        calendarView.setRtl(true);
         calendarView.init(
             lastYear.getTime(),
             nextYear.getTime(),
