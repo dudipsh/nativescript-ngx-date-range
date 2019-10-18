@@ -2,7 +2,7 @@
 
 Date Range Picker plugin for Nativescript support only for Android (for now)
 Support RTL
-![nativesceipt date range](https://raw.githubusercontent.com/dudipsh/nativescript-ngx-date-range/master/screenshots/calendar.png)
+![nativesceipt date range](https://raw.githubusercontent.com/dudipsh/nativescript-ngx-date-range/master/screenshots/calendar_he.png)
 ![nativesceipt date range](https://raw.githubusercontent.com/dudipsh/nativescript-ngx-date-range/master/screenshots/calendar_en.png)
 
 ## Installation
