@@ -19,17 +19,18 @@ export class HomeComponent implements OnInit {
         const options = new Options();
         options.selectionMode = 'RANGE';
         options.selectToday = true;
-        options.supportsRtl = true;
-        options.disablePrevDates = true;
-        options.language = {
-            countryCode: 'ISR',
-            languageCode: 'he'
-        };
-        this.dateRange = create(options);
+        // options.supportsRtl = true;
+        // options.disablePrevDates = true;
+        // options.language = {
+        //     countryCode: 'ISR',
+        //     languageCode: 'he'
+        // };
+        this.dateRange =  create(options);
     }
 
     selectedDates() {
-        console.log(this.dateRange.getSelectedDates());
+       // console.log(this.dateRange.getSelectedDates());
+        this.dateRange.showDateRangePicker();
     }
 
 }
