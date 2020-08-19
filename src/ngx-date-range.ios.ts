@@ -33,36 +33,36 @@ class CalendarDateRangePickerViewControllerDelegateImpl extends NSObject
 }
 
 export class NgxDateRange extends Common {
-    delegate: CalendarDateRangePickerViewControllerDelegateImpl;
-    constructor() {
-        super();
-        this.showDateRangePicker();
-    }
-    showDateRangePicker() {
-        const nativeView = CalendarDateRangePickerViewController.new().initWithCollectionViewLayout(
-            UICollectionViewFlowLayout.new().init(),
-        );
-
-        this.delegate = CalendarDateRangePickerViewControllerDelegateImpl.new().init();
-
-        nativeView.delegate = this.delegate;
-
-        const navigationController = UINavigationController.new().initWithRootViewController(
-            nativeView,
-        );
-
-        const currentViewController = topmost().viewController as UIViewController;
-
-        currentViewController.presentViewControllerAnimatedCompletion(
-            navigationController,
-            true,
-            () => {
-                // TODO: Pending of implementation
-                console.log('Date Picker presented');
-            },
-        );
-        currentViewController['allowsMultipleSelection'] = false;
-    }
+    // delegate: CalendarDateRangePickerViewControllerDelegateImpl;
+    // constructor() {
+    //     super();
+    //  //   this.showDateRangePicker();
+    // }
+    // showDateRangePicker() {
+    //     const nativeView = CalendarDateRangePickerViewController.new().initWithCollectionViewLayout(
+    //         UICollectionViewFlowLayout.new().init(),
+    //     );
+    //
+    //     this.delegate = CalendarDateRangePickerViewControllerDelegateImpl.new().init();
+    //
+    //     nativeView.delegate = this.delegate;
+    //
+    //     const navigationController = UINavigationController.new().initWithRootViewController(
+    //         nativeView,
+    //     );
+    //
+    //     const currentViewController = topmost().viewController as UIViewController;
+    //
+    //     currentViewController.presentViewControllerAnimatedCompletion(
+    //         navigationController,
+    //         true,
+    //         () => {
+    //             // TODO: Pending of implementation
+    //             console.log('Date Picker presented');
+    //         },
+    //     );
+    //     currentViewController['allowsMultipleSelection'] = false;
+    // }
     // initializeVars(){
     //     const calendar = Date()['currentCalendar']
     //     const currentDate = Date().today
@@ -75,6 +75,8 @@ export class NgxDateRange extends Common {
     //     }
     //     direction = NSLocale.characterDirection(forLanguage: langCode).rawValue == 2 ? .rightToLeft : .leftToRight
     // }
+
+    getSelectedDates() {}
 }
 export function create(_options?: Options) {
     options = _options;

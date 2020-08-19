@@ -3,7 +3,7 @@ import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import {NgxDateRange} from "../../../src";
+// import {NgxDateRange} from "../../../src";
 // new NgxDateRange().greet();
 
 @NgModule({

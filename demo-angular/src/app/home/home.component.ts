@@ -17,8 +17,8 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(): void {
         const options = new Options();
-        options.selectionMode = 'RANGE';
-        options.selectToday = true;
+        options.selectionMode = 'MULTIPLE';
+        options.selectToday = false;
         // options.supportsRtl = true;
         // options.disablePrevDates = true;
         // options.language = {
