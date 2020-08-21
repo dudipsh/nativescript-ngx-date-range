@@ -13,13 +13,63 @@ class CalendarDateRangePickerViewControllerDelegateImpl extends NSObject
   }
 
   didPickDateRangeWithStartDateEndDate(startDate: Date, endDate: Date): void {
-    console.log('didPickDateRangeWithStartDateEndDate', { startDate, endDate });
+    console.log('=-=-=-=-Done=-=-=-=-=-=-=-');
+    //console.log('didPickDateRangeWithStartDateEndDate', { startDate, endDate });
+    const currentViewController = topmost().viewController as UIViewController;
+    currentViewController.dismissViewControllerAnimatedCompletion(true, () => {
+      console.log('Date picker closed on Done.');
+      console.log(
+        'Start Date: ' +
+          startDate.getDate() +
+          '-' +
+          startDate.getMonth() +
+          '-' +
+          startDate.getFullYear()
+      );
+      console.log(
+        'End Date: ' +
+          endDate.getDate() +
+          '-' +
+          endDate.getMonth() +
+          '-' +
+          endDate.getFullYear()
+      );
+      alert(
+        'Start Date: ' +
+          startDate.getDate() +
+          ' -' +
+          startDate.getMonth() +
+          '-' +
+          startDate.getFullYear() +
+          '\nEnd Date: ' +
+          endDate.getDate() +
+          '-' +
+          endDate.getMonth() +
+          '-' +
+          endDate.getFullYear()
+      );
+    });
   }
   didSelectEndDateWithEndDate(endDate: Date): void {
-    console.log('didSelectEndDateWithEndDate', { endDate });
+    // console.log('didSelectEndDateWithEndDate', { endDate });
+    // console.log(
+    //   endDate.getDate() +
+    //     ' - ' +
+    //     endDate.getMonth() +
+    //     ' - ' +
+    //     endDate.getFullYear()
+    // );
   }
+
   didSelectStartDateWithStartDate(startDate: Date): void {
-    console.log('didSelectStartDateWithStartDate', { startDate });
+    // console.log(
+    //   startDate.getDate() +
+    //     ' - ' +
+    //     startDate.getMonth() +
+    //     ' - ' +
+    //     startDate.getFullYear()
+    // );
+    // console.log('didSelectStartDateWithStartDate', { startDate });
   }
 
   didCancelPickingDateRange(): void {
@@ -43,17 +93,25 @@ export class NgxDateRange extends Common {
     );
 
     this.delegate = CalendarDateRangePickerViewControllerDelegateImpl.new().init();
-
+    // nativeView
     nativeView.delegate = this.delegate;
-
-    nativeView.minimumDate = new Date();
-    nativeView.maximumDate = new Date();
-    nativeView.maximumDate.setFullYear(
-      nativeView.maximumDate.getFullYear() + 1
+    var myCurrentDate = new Date();
+    var maximumDateYear = new Date(
+      myCurrentDate.setFullYear(myCurrentDate.getFullYear() + 2)
     );
+    nativeView.minimumDate = new Date();
+    nativeView.maximumDate = maximumDateYear;
 
-    nativeView.selectedStartDate = new Date();
+    // If you want to show selected range on calendar
+    // nativeView.selectedStartDate = new Date();
+    // var todayDate = new Date();
+    // var myEndDate = new Date(todayDate);
+    // myEndDate.setDate(myEndDate.getDate() + 8);
+    // nativeView.selectedEndDate = myEndDate;
 
+    console.log('nativeView :::::::::: ', nativeView);
+
+    //alert(myEndDate);
     const navigationController = UINavigationController.new().initWithRootViewController(
       nativeView
     );
@@ -88,6 +146,8 @@ export class NgxDateRange extends Common {
 }
 export function create(_options?: Options) {
   options = _options;
+  // options.selectionMode = 'SINGLE';
+  console.log('options::::: ', options);
   return new NgxDateRange();
 }
 registerElement('NgxDateRange', () => require('./').NgxDateRange);
