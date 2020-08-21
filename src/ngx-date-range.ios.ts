@@ -70,6 +70,7 @@ class CalendarDateRangePickerViewControllerDelegateImpl extends NSObject
     //     startDate.getFullYear()
     // );
     // console.log('didSelectStartDateWithStartDate', { startDate });
+
   }
 
   didCancelPickingDateRange(): void {
@@ -93,6 +94,7 @@ export class NgxDateRange extends Common {
     );
 
     this.delegate = CalendarDateRangePickerViewControllerDelegateImpl.new().init();
+    
     // nativeView
     nativeView.delegate = this.delegate;
     var myCurrentDate = new Date();
