@@ -1,1 +1,3 @@
 pod 'CalendarDateRangePicker', :git => 'https://github.com/dudipsh/CalendarDateRangePicker.git'
+# pod 'CalendarDateRangePicker', :git => 'git@github.com:shahdeep1989/CalendarDateRangePicker.git'
+
