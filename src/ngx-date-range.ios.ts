@@ -3,6 +3,12 @@ import { topmost } from 'tns-core-modules/ui/frame';
 import { registerElement } from 'nativescript-angular';
 
 let options: Options = new Options();
+let selectedDates = {
+  startDate: null,
+  endDate: null,
+  originDates: null
+};
+
 
 class CalendarDateRangePickerViewControllerDelegateImpl
   extends NSObject
@@ -18,37 +24,8 @@ class CalendarDateRangePickerViewControllerDelegateImpl
     //console.log('didPickDateRangeWithStartDateEndDate', { startDate, endDate });
     const currentViewController = topmost().viewController as UIViewController;
     currentViewController.dismissViewControllerAnimatedCompletion(true, () => {
-      console.log('Date picker closed on Done.');
-      console.log(
-        'Start Date: ' +
-          startDate.getDate() +
-          '-' +
-          startDate.getMonth() +
-          '-' +
-          startDate.getFullYear()
-      );
-      console.log(
-        'End Date: ' +
-          endDate.getDate() +
-          '-' +
-          endDate.getMonth() +
-          '-' +
-          endDate.getFullYear()
-      );
-      alert(
-        'Start Date: ' +
-          startDate.getDate() +
-          ' -' +
-          startDate.getMonth() +
-          '-' +
-          startDate.getFullYear() +
-          '\nEnd Date: ' +
-          endDate.getDate() +
-          '-' +
-          endDate.getMonth() +
-          '-' +
-          endDate.getFullYear()
-      );
+      selectedDates.startDate = startDate;
+      selectedDates.endDate = endDate;
     });
   }
   didSelectEndDateWithEndDate(endDate: Date): void {
@@ -85,24 +62,8 @@ class CalendarDateRangePickerViewControllerDelegateImpl
     console.log('Single Date Selection');
     const currentViewController = topmost().viewController as UIViewController;
     currentViewController.dismissViewControllerAnimatedCompletion(true, () => {
-      console.log('Date picker closed on Done.');
-      console.log(
-        'Start Date: ' +
-          startDate.getDate() +
-          '-' +
-          startDate.getMonth() +
-          '-' +
-          startDate.getFullYear()
-      );
-
-      alert(
-        'Selected Date: ' +
-          startDate.getDate() +
-          '-' +
-          startDate.getMonth() +
-          '-' +
-          startDate.getFullYear()
-      );
+      selectedDates.startDate = startDate;
+      selectedDates.endDate = startDate;
     });
   }
 }
@@ -114,6 +75,7 @@ export class NgxDateRange extends Common {
     //   this.showDateRangePicker();
   }
   showDateRangePicker() {
+    resetSelectedDates();
     const nativeView = CalendarDateRangePickerViewController.new().initWithCollectionViewLayout(
       UICollectionViewFlowLayout.new().init()
     );
@@ -129,13 +91,6 @@ export class NgxDateRange extends Common {
     nativeView.minimumDate = new Date();
     nativeView.maximumDate = maximumDateYear;
     nativeView.calenderSelectionStyle = options.selectionMode;
-
-    // If you want to show selected range on calendar
-    // nativeView.selectedStartDate = new Date();
-    // var todayDate = new Date();
-    // var myEndDate = new Date(todayDate);
-    // myEndDate.setDate(myEndDate.getDate() + 8);
-    // nativeView.selectedEndDate = myEndDate;
 
     const navigationController = UINavigationController.new().initWithRootViewController(
       nativeView
@@ -153,21 +108,10 @@ export class NgxDateRange extends Common {
     );
     currentViewController['allowsMultipleSelection'] = false;
   }
-  // initializeVars() {
-  //   console.log('=-=-=-=-=-initializeVars=-=-=-=-=-=-=-=-');
-  //   const calendar = Date()['currentCalendar'];
-  //   const currentDate = Date().today;
-  //   const startDate = currentDate.startDayOfMonth;
-  //   const numberOfDaysInMonth = currentDate.daysIntMonth;
 
-  //   const langCode = 'he';
-  //   let lcode = (calendar.locale.languageCode = {
-  //     langCode = lcode,
-  //   });
-  //   direction = NSLocale.characterDirection(forLanguage: langCode).rawValue == 2 ? .rightToLeft : .leftToRight
-  // }
-
-  getSelectedDates() {}
+  getSelectedDates() {
+    return selectedDates;
+  }
 }
 export function create(_options?: Options) {
   options = _options;
@@ -175,4 +119,13 @@ export function create(_options?: Options) {
   console.log('options::::: ', options);
   return new NgxDateRange();
 }
+
+function resetSelectedDates() {
+  selectedDates = {
+    startDate: null,
+    endDate: null,
+    originDates: null
+  };
+}
+
 registerElement('NgxDateRange', () => require('./').NgxDateRange);

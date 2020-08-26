@@ -36,4 +36,9 @@ export class HomeComponent implements OnInit {
         // console.log(this.dateRange.getSelectedDates());
         this.dateRange.showDateRangePicker();
     }
+
+    getSelectedDate() {
+        const selectedDates = this.dateRange.getSelectedDates();
+        console.log(selectedDates)
+    }
 }

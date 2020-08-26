@@ -2,7 +2,7 @@
   <Label class="action-bar-title" text="Home"></Label>
 </ActionBar>
 
-<StackLayout class="page" style="background-color: #50ae71">
+<StackLayout class="page" style="background-color: #ace6f1">
   <Button
     class="btn btn-active"
     text="Get Dates Range"
@@ -14,5 +14,6 @@
     (tap)="selectedDates('SINGLE')"
   ></Button>
   <NgxDateRange></NgxDateRange>
+  <Button (tap)="getSelectedDate()" text="Get Dates"></Button>
   <!-- Add your page content here -->
 </StackLayout>
