@@ -4,7 +4,8 @@ import { registerElement } from 'nativescript-angular';
 
 let options: Options = new Options();
 
-class CalendarDateRangePickerViewControllerDelegateImpl extends NSObject
+class CalendarDateRangePickerViewControllerDelegateImpl
+  extends NSObject
   implements CalendarDateRangePickerViewControllerDelegate {
   static ObjCProtocols = [CalendarDateRangePickerViewControllerDelegate];
 
@@ -70,7 +71,6 @@ class CalendarDateRangePickerViewControllerDelegateImpl extends NSObject
     //     startDate.getFullYear()
     // );
     // console.log('didSelectStartDateWithStartDate', { startDate });
-
   }
 
   didCancelPickingDateRange(): void {
@@ -78,6 +78,31 @@ class CalendarDateRangePickerViewControllerDelegateImpl extends NSObject
     const currentViewController = topmost().viewController as UIViewController;
     currentViewController.dismissViewControllerAnimatedCompletion(true, () => {
       console.log('Date picker dismissed');
+    });
+  }
+
+  didPickSingleDateWithStartDate(startDate: Date): void {
+    console.log('Single Date Selection');
+    const currentViewController = topmost().viewController as UIViewController;
+    currentViewController.dismissViewControllerAnimatedCompletion(true, () => {
+      console.log('Date picker closed on Done.');
+      console.log(
+        'Start Date: ' +
+          startDate.getDate() +
+          '-' +
+          startDate.getMonth() +
+          '-' +
+          startDate.getFullYear()
+      );
+
+      alert(
+        'Selected Date: ' +
+          startDate.getDate() +
+          '-' +
+          startDate.getMonth() +
+          '-' +
+          startDate.getFullYear()
+      );
     });
   }
 }
@@ -94,7 +119,7 @@ export class NgxDateRange extends Common {
     );
 
     this.delegate = CalendarDateRangePickerViewControllerDelegateImpl.new().init();
-    
+
     // nativeView
     nativeView.delegate = this.delegate;
     var myCurrentDate = new Date();
@@ -103,6 +128,7 @@ export class NgxDateRange extends Common {
     );
     nativeView.minimumDate = new Date();
     nativeView.maximumDate = maximumDateYear;
+    nativeView.calenderSelectionStyle = options.selectionMode;
 
     // If you want to show selected range on calendar
     // nativeView.selectedStartDate = new Date();
@@ -111,9 +137,6 @@ export class NgxDateRange extends Common {
     // myEndDate.setDate(myEndDate.getDate() + 8);
     // nativeView.selectedEndDate = myEndDate;
 
-    console.log('nativeView :::::::::: ', nativeView);
-
-    //alert(myEndDate);
     const navigationController = UINavigationController.new().initWithRootViewController(
       nativeView
     );
