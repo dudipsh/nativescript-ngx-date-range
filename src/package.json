@@ -1,6 +1,6 @@
 {
 	"name": "nativescript-ngx-date-range",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"description": "Date Range Picker for Nativescript",
 	"main": "ngx-date-range",
 	"typings": "index.d.ts",
