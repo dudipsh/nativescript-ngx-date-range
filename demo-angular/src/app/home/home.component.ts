@@ -16,8 +16,9 @@ export class HomeComponent implements OnInit {
     ngOnInit(): void {
         const options = new Options();
         // options.selectionMode = "MULTIPLE";
-        options.selectionMode = "SINGLE";
+        options.selectionMode = "RANGE";
         options.selectToday = false;
+
         this.dateRange = create(options);
     }
 
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit {
         const options = new Options();
         options.selectionMode = selectionMode;
         this.dateRange = create(options);
-        this.dateRange.showDateRangePicker();
+        //this.dateRange.();
     }
 
     getSelectedDate() {
