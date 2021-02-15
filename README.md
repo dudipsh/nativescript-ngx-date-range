@@ -57,6 +57,8 @@ Options  = {
     supportsRtl?: boolean; // default = false
     disablePrevDates?: boolean; // default = false
     selectToday?: boolean;  // default = false
+    minDate?: string; // (Android only) default = today
+    maxDate?: string; // (Android only) default = today + 1 year
     language?: 
         {
              countryCode: 'ISR', //default = null
